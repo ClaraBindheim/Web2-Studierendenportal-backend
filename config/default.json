@@ -1,0 +1,13 @@
+{
+    "session": {
+        "tokenKey": "gueihfoirsjfoepsajirajgirajgirsajgirosagsajgio",
+        "timeout":  300  
+    },
+    "db": {
+        "connectionOptions": {
+        "useNewUrlParser": true,
+        "useUnifiedTopology": true
+        },
+        "connectionString": "mongodb://localhost/Web2DB" 
+    }
+}

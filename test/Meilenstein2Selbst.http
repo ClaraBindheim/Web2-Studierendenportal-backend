@@ -1,0 +1,58 @@
+// Login mit Basic Authentication als manfred mit korrekten Credentials
+###
+# @name loginManfredCorrect
+GET http://localhost/api/authenticate
+Authorization: Basic manfred:asdf
+
+@manfredToken = {{loginManfredCorrect.response.headers.Authorization}}
+
+// Login mit Basic Authentication als admin mit korrekten Credentials admin:123
+###
+# @name loginAdminCorrect
+GET http://localhost/api/authenticate
+Authorization: Basic YWRtaW46MTIz
+
+@adminToken = {{loginAdminCorrect.response.headers.Authorization}}
+
+### Abrufen des angelegten Users mit dem Manfred-Token
+GET http://localhost/api/users/manfred
+Authorization: {{manfredToken}}
+
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/users/admin
+Content-Type: application/json
+Authorization: {{manfredToken}}
+
+{
+    "firstName": "Sandra",
+    "lastName": "Meier"
+}
+
+// Lege einen Studiengang an
+###
+# @name createDegreeCourseRequest
+POST http://127.0.0.1/api/degreeCourses
+Authorization: {{adminToken}}
+Content-Type: application/json
+
+{
+    "universityName": "TU",
+    "universityShortName": "TU",
+    "departmentName": "Informatik und Medien",
+    "departmentShortName": "FB VI",
+    "name": "Orchideenzucht Bachelor",
+    "shortName": "OZ-BA"
+}
+
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT http://localhost/api/users/manfred
+Content-Type: application/json
+Authorization: {{manfredToken}}
+
+{
+    "firstName": "Sandra",
+    "isAdministrator": true
+}
+

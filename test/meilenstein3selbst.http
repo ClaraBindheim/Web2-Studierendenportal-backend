@@ -1,0 +1,19 @@
+// Login mit Basic Authentication mit korrekten Credentials admin:123
+###
+# @name loginAdminCorrect
+GET https://localhost/api/authenticate
+Authorization: Basic YWRtaW46MTIz
+
+@adminToken = {{loginAdminCorrect.response.headers.Authorization}}
+
+// Ändere beim zweiten User den User-Name. Zur Selektion des Users verwende die userID.
+###
+PUT https://localhost/api/users/manfred
+Content-Type: application/json
+Authorization: {{adminToken}}
+
+{
+    "firstName": "Sandra",
+    "lastName": "Meier",
+    "isAdministrator": true
+}

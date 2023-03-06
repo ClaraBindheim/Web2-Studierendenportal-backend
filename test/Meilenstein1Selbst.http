@@ -1,0 +1,50 @@
+//User ohne id
+POST http://localhost/api/publicUsers
+Content-Type: application/json
+
+{
+
+    "firstName": "Udo",
+    "lastName": "Müller",
+    "password": "123",
+    "isAdministrator": true
+}
+
+###
+//User mit userId manfred zurückgeben
+GET http://localhost/api/publicUsers/manfred
+
+###
+//User mit userId die nicht existiert zurückgeben
+GET http://localhost/api/publicUsers/bob
+
+###
+//delete admin
+DELETE  http://localhost/api/publicUsers/admin
+
+###
+//delete User der nicht existiert
+DELETE  http://localhost/api/publicUsers/bob
+
+###
+//update User der nicht existiert
+PUT   http://localhost/api/publicUsers/bob
+Content-Type: application/json
+
+{
+    "firstName": "Marina",
+    "lastName": "Sauerbier"
+}
+
+###
+//update User ohne neuen Inhalt
+PUT   http://localhost/api/publicUsers/admin
+
+###
+//update password
+PUT http://localhost/api/publicUsers/manfred
+Content-Type: application/json
+
+{
+    "password": "Marina"
+}
